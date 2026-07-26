@@ -1,0 +1,21 @@
+node_modules/
+dist/
+dist-ssr/
+
+# Local Catalyst CLI project link — machine/session-specific, re-created via
+# `catalyst init --project 54722000000022001`. catalyst.json (the actual
+# deployment manifest, client.source -> dist) is intentionally tracked.
+.catalystrc
+catalyst-debug.log
+
+*.log
+npm-debug.log*
+
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.claude/
+
+.DS_Store
+
+*.tsbuildinfo

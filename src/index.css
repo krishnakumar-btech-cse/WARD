@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: 210 20% 98%;
+  --foreground: 222 25% 13%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 25% 13%;
+  --border: 214 15% 88%;
+  --input: 214 15% 88%;
+  --muted: 210 16% 93%;
+  --muted-foreground: 215 12% 42%;
+  --primary: 221 70% 40%;
+  --primary-foreground: 0 0% 100%;
+  --success: 152 55% 30%;
+  --warning: 38 85% 42%;
+  --critical: 355 65% 45%;
+  --ring: 221 70% 55%;
+
+  /* Categorical chart palette — validated (CVD + contrast) against this surface via dataviz skill's validator. Fixed order, never cycled/reassigned by rank. */
+  --chart-1: #2a78d6;
+  --chart-2: #eb6834;
+  --chart-3: #1baf7a;
+  --chart-4: #eda100;
+  --chart-5: #e87ba4;
+  --chart-6: #008300;
+  --chart-7: #4a3aa7;
+  --chart-8: #e34948;
+  --chart-grid: #e1e0d9;
+
+  /* Fixed brand-mark colors (the WardMark emblem + favicon) — constant across light/dark, like a badge or seal rather than themed UI. */
+  --brand-navy: #0b1e3d;
+  --brand-cream: #f2ecd9;
+}
+
+.dark {
+  --background: 222 28% 9%;
+  --foreground: 210 20% 92%;
+  --card: 222 24% 12%;
+  --card-foreground: 210 20% 92%;
+  --border: 217 18% 20%;
+  --input: 217 18% 20%;
+  --muted: 217 18% 16%;
+  --muted-foreground: 215 12% 62%;
+  --primary: 217 85% 65%;
+  --primary-foreground: 222 30% 10%;
+  --success: 152 45% 48%;
+  --warning: 38 80% 58%;
+  --critical: 355 70% 62%;
+  --ring: 217 85% 65%;
+
+  --chart-1: #3987e5;
+  --chart-2: #d95926;
+  --chart-3: #199e70;
+  --chart-4: #c98500;
+  --chart-5: #d55181;
+  --chart-6: #008300;
+  --chart-7: #9085e9;
+  --chart-8: #e66767;
+  --chart-grid: #2c2c2a;
+}
+
+@theme inline {
+  --font-sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, -apple-system, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "Consolas", monospace;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-success: hsl(var(--success));
+  --color-warning: hsl(var(--warning));
+  --color-critical: hsl(var(--critical));
+  --color-ring: hsl(var(--ring));
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+  --color-chart-7: var(--chart-7);
+  --color-chart-8: var(--chart-8);
+  --color-chart-grid: var(--chart-grid);
+
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-cream: var(--brand-cream);
+}
+
+body {
+  font-family: var(--font-sans);
+  @apply bg-background text-foreground antialiased;
+}
+
+* {
+  @apply border-border;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(16px);
+    opacity: 0;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 150ms ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 200ms ease-out;
+}
+
+/* Printed/PDF-exported reports always render in light mode, regardless of
+   the active theme — a dark-background printout wastes toner and reads
+   poorly on paper. App chrome (sidebar/top bar) is hidden via print:hidden
+   on those components; this only forces the color variables. */
+@media print {
+  :root,
+  .dark {
+    --background: 210 20% 98%;
+    --foreground: 222 25% 13%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 25% 13%;
+    --border: 214 15% 88%;
+    --muted: 210 16% 93%;
+    --muted-foreground: 215 12% 42%;
+  }
+}
